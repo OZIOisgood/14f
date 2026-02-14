@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 Секретный квест</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Floating particles background -->
+    <div id="particles"></div>
+
+    <!-- ==================== SCREEN 1: INTRO ==================== -->
+    <section class="screen active" id="screen-intro">
+        <div class="screen-content">
+            <div class="classified-badge">🔒 СОВЕРШЕННО СЕКРЕТНО</div>
+            <h1 class="intro-title">
+                Этот квест создан<br>для одного особенного человека
+            </h1>
+            <p class="intro-subtitle">
+                Если ты не <strong>моё солнышко
+                </strong> — немедленно закрой эту страницу 😤
+            </p>
+            <div class="photo-frame polaroid" id="intro-photo">
+                <img src="assets/main_photo.jpg" alt="Аня и Паша">
+                <div class="polaroid-caption">Аня &amp; Паша</div>
+            </div>
+            <button class="btn btn-primary btn-glow" onclick="goToScreen('screen-quiz')">
+                Это точно я →
+            </button>
+        </div>
+    </section>
+
+    <!-- ==================== SCREEN 2: QUIZ ==================== -->
+    <section class="screen" id="screen-quiz">
+        <div class="screen-content">
+            <div class="quiz-header">
+                <h2>🧠 Проверка личности</h2>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+                </div>
+                <p class="quiz-counter" id="quiz-counter">Вопрос 1 из 3</p>
+            </div>
+            <div id="quiz-container"></div>
+            <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+            <button class="btn btn-primary btn-glow hidden" id="quiz-next">Дальше →</button>
+        </div>
+    </section>
+
+    <!-- ==================== SCREEN 3: PASSWORD ==================== -->
+    <section class="screen" id="screen-password">
+        <div class="screen-content">
+            <div class="lock-icon">🔐</div>
+            <h2>Последняя проверка...</h2>
+            <p class="password-hint">Напиши город, в котором мы расписались 💍</p>
+            <div class="password-input-wrap">
+                <input type="text" id="password-input" placeholder="Введи ответ..." autocomplete="off" spellcheck="false">
+                <button class="btn btn-primary" id="password-submit">Проверить</button>
+            </div>
+            <button class="btn btn-secret" id="btn-idk">А ты сам-то знаешь? 🤔</button>
+            <p id="password-idk" class="password-idk hidden">Честно? Нет 😂<br>Но если ты что-нибудь напишешь — я поверю</p>
+            <div id="password-success" class="password-success hidden">
+                <div class="access-granted">✅ ДОСТУП РАЗРЕШЁН</div>
+                <p>Я сам не помню, так что... пойдёт 😂</p>
+                <button class="btn btn-primary btn-glow" onclick="goToScreen('screen-runaway')">
+                    Продолжить →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SCREEN 4: RUNAWAY BUTTON ==================== -->
+    <section class="screen" id="screen-runaway">
+        <div class="screen-content runaway-content">
+            <div class="runaway-emoji">🥺👉👈</div>
+            <h2 class="runaway-question">Ты будешь моей валентинкой<br>навсегда-навсегда?</h2>
+            <div class="runaway-buttons">
+                <button class="btn btn-yes btn-glow" id="btn-yes">ДА! 💖</button>
+                <button class="btn btn-no" id="btn-no">Нет</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SCREEN 5: HEART GAME ==================== -->
+    <section class="screen" id="screen-game">
+        <div class="screen-content game-screen-content">
+            <h2>💛 Поймай золотые сердечки!</h2>
+            <p class="game-subtitle">Каждое сердечко — причина почему я тебя люблю</p>
+            <div class="game-score">Поймано: <span id="game-score">0</span> / 5</div>
+            <div id="game-area" class="game-area"></div>
+            <div id="game-reason" class="game-reason hidden"></div>
+            <button class="btn btn-primary btn-glow hidden" id="game-next" onclick="goToScreen('screen-timeline')">
+                Дальше →
+            </button>
+        </div>
+    </section>
+
+    <!-- ==================== SCREEN 6: GALLERY ==================== -->
+    <section class="screen" id="screen-timeline">
+        <div class="screen-content screen-content-scroll gallery-scroll">
+            <h2 class="gallery-title">📸 Наш альбом</h2>
+            <p class="gallery-subtitle">Листай вниз ↓</p>
+
+            <div class="gallery" id="gallery"></div>
+
+            <button class="btn btn-primary btn-glow gallery-next-btn" id="gallery-next" onclick="goToScreen('screen-letter')">
+                Открыть письмо →
+            </button>
+        </div>
+    </section>
+
+    <!-- ==================== SCREEN 7: LOVE LETTER ==================== -->
+    <section class="screen" id="screen-letter">
+        <div class="screen-content">
+            <h2 class="letter-heading">У тебя новое письмо 💌</h2>
+
+            <div class="envelope-wrapper" id="envelope-wrapper">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-top"></div>
+                    <div class="envelope-body">
+                        <div class="envelope-heart-icon">❤️</div>
+                    </div>
+                    <p class="envelope-hint">Нажми, чтобы открыть</p>
+                </div>
+            </div>
+
+            <div class="letter hidden" id="letter">
+                <div class="letter-paper">
+                    <p class="letter-greeting">Солнышко,</p>
+                    <p>Я не самый состоятельный человек, ты знаешь, но я тебя очень люблю.</p>
+                    <p>Мы с тобой впервые встретились 10 лет назад. Я, честно, даже не помню тот день, но именно тогда наши судьбы пересеклись и незаметно начали сплетаться в одну историю. Я даже не мог представить, что эта девчонка однажды станет моей женой.</p>
+                    <p>Мы прошли через очень многое: через разные трудности и маленькие победы, через переезды и моменты, когда нужно было просто держаться друг за друга. Были и счастливые дни, и поездки, и путешествия, и те тёплые воспоминания, которые хочется пересматривать снова и снова. Каждый день с тобой — это маленькое приключение: иногда смешное, иногда сложное, но всегда стоящее.</p>
+                    <p>Спасибо, что ты рядом.<br>Спасибо, что смеёшься над моими шутками.<br>Спасибо, что ты — это ты.</p>
+                    <p>Я тебя люблю. Не только сегодня. Вообще. Всегда. ❤️</p>
+                    <p class="letter-signature">Твой Паша</p>
+                </div>
+                <button class="btn btn-primary btn-glow" onclick="goToScreen('screen-finale')" style="margin-top: 1.5rem;">
+                    Дальше... →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SCREEN 8: FINALE ==================== -->
+    <section class="screen" id="screen-finale">
+        <div class="screen-content">
+            <div id="confetti-container"></div>
+            <h1 class="finale-title">С Днём Святого Валентина!</h1>
+            <p class="finale-subtitle">🎉 Ты прошла весь квест! Теперь бонусы: 🎉</p>
+
+            <div class="bonus-cards">
+                <div class="bonus-card" onclick="flipCard(this)">
+                    <div class="bonus-card-inner">
+                        <div class="bonus-card-front">
+                            <span class="bonus-emoji">🎁</span>
+                            <p>Купон #1</p>
+                        </div>
+                        <div class="bonus-card-back">
+                            <p class="bonus-title">Объятия безлимит 24/7</p>
+                            <small>Срок действия: навсегда</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-card" onclick="flipCard(this)">
+                    <div class="bonus-card-inner">
+                        <div class="bonus-card-front">
+                            <span class="bonus-emoji">🎁</span>
+                            <p>Купон #2</p>
+                        </div>
+                        <div class="bonus-card-back">
+                            <p class="bonus-title">🧗 Детское скалолазание</p>
+                            <small>Да, мы идём лазить по стенам</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-card" onclick="flipCard(this)">
+                    <div class="bonus-card-inner">
+                        <div class="bonus-card-front">
+                            <span class="bonus-emoji">🎁</span>
+                            <p>Купон #3</p>
+                        </div>
+                        <div class="bonus-card-back">
+                            <p class="bonus-title">🍕 Ресторан на твой выбор</p>
+                            <small>Иначе будет на мой, а я хочу в тот самый неаполитанский 😏</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-secret" id="btn-secret" onclick="toggleSecret()">
+                🤫 Секретная кнопка
+            </button>
+            <div id="secret-content" class="secret-content hidden">
+                <p class="secret-text" id="secret-text"></p>
+                <button class="btn btn-mini" onclick="nextSecret()">Ещё →</button>
+            </div>
+
+            <div class="finale-footer">
+                <p>Сделано с ❤️ и бессонной ночью</p>
+                <p class="finale-date">14.02.2026</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
